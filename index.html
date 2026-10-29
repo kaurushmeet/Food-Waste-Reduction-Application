@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshTrack | Food Waste Reduction</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-icon">🌿</span><span><b>FreshTrack</b><small>Less Waste, More Tomorrow</small></span></a>
+    <nav>
+      <a class="active" href="#home">⌂ <span>Home</span></a>
+      <a href="#inventory">▣ <span>My Inventory</span></a>
+      <a href="#meals">♨ <span>Meal Suggestions</span></a>
+      <a href="#tracker">♧ <span>Waste Tracker</span></a>
+      <a href="#tips">✳ <span>Tips & Learn</span></a>
+    </nav>
+    <div class="sidebar-note"><span>🌱</span><b>A greener tomorrow starts with smarter choices.</b></div>
+  </aside>
+
+  <main class="main" id="home">
+    <header class="topbar">
+      <div><span class="eyebrow">YOUR KITCHEN, SMARTER</span><h1>Good food deserves to be eaten.</h1></div>
+      <button class="button primary" id="addTop">＋ Add food</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-tag">🌍 SMALL HABITS, BIG IMPACT</span>
+        <h2>Good Food Today,<br><em>A Better Tomorrow.</em></h2>
+        <p>Track what you have, use food before it expires, and make small choices that help reduce food waste.</p>
+        <a class="button lime" href="#inventory">Manage my kitchen ↘</a>
+      </div>
+      <div class="hero-art" aria-label="Fresh vegetables">🥬 🍅 🥕</div>
+    </section>
+
+    <section class="stats">
+      <article class="stat"><div class="stat-top"><span>Food items tracked</span><span class="stat-icon">🧺</span></div><strong id="total">0</strong><small>Items in your kitchen</small></article>
+      <article class="stat"><div class="stat-top"><span>Use soon</span><span class="stat-icon">⏰</span></div><strong id="soon">0</strong><small>Due in 3 days or less</small></article>
+      <article class="stat"><div class="stat-top"><span>Food rescued</span><span class="stat-icon">💚</span></div><strong id="rescued">0</strong><small>Used or donated items</small></article>
+      <article class="stat"><div class="stat-top"><span>Waste avoided</span><span class="stat-icon">🌱</span></div><strong id="saved">0 kg</strong><small>Estimated weight saved</small></article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel inventory" id="inventory">
+        <div class="panel-heading"><div><h2>My Food Inventory</h2><p>Know what you have before buying more.</p></div><button class="button primary" id="addMain">＋ Add item</button></div>
+        <div class="toolbar"><input id="search" type="search" placeholder="Search food items..."><select id="filter"><option value="all">All items</option><option value="soon">Use soon</option><option value="expired">Past date</option><option value="fresh">Fresh</option></select></div>
+        <div id="foodList" class="food-list"></div>
+      </section>
+
+      <div class="right-column">
+        <section class="panel" id="meals">
+          <div class="panel-heading"><div><h2>Smart Meal Ideas</h2><p>Suggestions for food to use soon.</p></div><span class="panel-emoji">🍲</span></div>
+          <div id="mealIdeas" class="meal-list"></div>
+        </section>
+        <section class="panel" id="tracker">
+          <div class="panel-heading"><div><h2>Waste Tracker</h2><p>Your small actions add up.</p></div><span class="panel-emoji">📊</span></div>
+          <div class="progress-row"><div class="donut" id="donut"><span id="percent">0%</span></div><div><b id="progressTitle">Keep going!</b><p id="progressText">Mark items as used or donated to track your progress.</p></div></div>
+          <div class="progress"><span id="progressBar"></span></div><div class="progress-caption"><span>Weekly goal: 10 items</span><b id="goal">0 / 10</b></div>
+        </section>
+        <section class="panel" id="tips">
+          <div class="panel-heading"><div><h2>Smart Kitchen Tips</h2><p>Everyday habits that help.</p></div><span class="panel-emoji">💡</span></div>
+          <div class="tip"><span>🥕</span><div><b>First in, first out</b><p>Move older groceries to the front.</p></div></div>
+          <div class="tip"><span>🧊</span><div><b>Freeze suitable extras</b><p>Label portions and freeze them promptly.</p></div></div>
+          <div class="tip"><span>🛒</span><div><b>Check before shopping</b><p>Use your inventory to avoid duplicates.</p></div></div>
+        </section>
+      </div>
+    </div>
+    <footer>Made for an Environmental Studies project · <b>FreshTrack</b> helps build mindful food habits.</footer>
+  </main>
+
+  <dialog id="foodDialog">
+    <form id="foodForm">
+      <div class="dialog-heading"><div><span class="eyebrow">YOUR KITCHEN</span><h2 id="dialogTitle">Add food item</h2></div><button type="button" class="close" id="closeDialog">×</button></div>
+      <input type="hidden" id="itemId">
+      <label>Food item name<input id="name" required maxlength="60" placeholder="e.g. Milk, apples, cooked rice"></label>
+      <div class="form-row">
+        <label>Category<select id="category"><option>Vegetables</option><option>Fruits</option><option>Dairy</option><option>Grains & bakery</option><option>Cooked food</option><option>Other</option></select></label>
+        <label>Quantity<input id="quantity" type="number" min="0.1" step="0.1" value="1" required></label>
+      </div>
+      <div class="form-row">
+        <label>Unit<select id="unit"><option>items</option><option>kg</option><option>g</option><option>litres</option><option>packs</option><option>servings</option></select></label>
+        <label>Storage<select id="storage"><option>Fridge</option><option>Freezer</option><option>Pantry</option><option>Counter</option></select></label>
+      </div>
+      <label>Use-by / expiry date<input id="expiry" type="date" required></label>
+      <div class="dialog-actions"><button type="button" class="button soft" id="cancelDialog">Cancel</button><button type="submit" class="button primary">Save item</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
